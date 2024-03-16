@@ -1,4 +1,6 @@
-# How to run (updated by py660)
+# How to run <kbd>oliver408i's</kbd> Blooket Game Code Finder
+
+(updated by py660)
 First, log into blooket. Then, open DevTools > Application > Cookies > https://dashboard.blooket.com
 Then find the value corresponding to `bsid`, and copy it. That's your account token. DO NOT SHARE IT! KEEP IT PRIVATE.
 
@@ -7,7 +9,7 @@ Your account token should look like:
 MTcxMDYxND...tdi0c=
 ```
 
-Run the following code:
+Run the following code in the terminal/shell:
 ```
 BSID=MTcxMD...tdi0c= python main.py
 ```
