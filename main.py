@@ -13,19 +13,19 @@ def genBSID():
 webhook = os.environ["WEBHOOK"] #YOUR WEBHOOK URL HERE
 
 def main():
-    bsid = genBSID()
+    bsid = [genBSID() for i in range(10)]
     while True:
         random_numbers = str(random.randint(1000000, 9999999))
         try:
             response = requests.get(
                 f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
-                cookies={"bsid": bsid})
+                cookies={"bsid": bsid[random.randint(0,9)]})
             while response.status_code == 429:
                 response = requests.get(
                 f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
-                cookies={"bsid": bsid})
+                cookies={"bsid": bsid[random.randint(0,9)]})
             if response.status_code == 403:
-                bsid = genBSID()
+                bsid = [genBSID() for i in range(10)]
             if response.json()["success"]:
                 print("Valid Game Code:", random_numbers)
                 if webhook:
