@@ -1,4 +1,3 @@
-thread_amount = 25 # How many threads to use? Put it below 10 if using on your home computer. 25 max (also fastest)
 
 #from discord_webhook import DiscordWebhook
 
@@ -10,7 +9,9 @@ def genBSID():
     sess = requests.Session()
     sess.get("https://play.blooket.com/play")
     return sess.cookies["bsid"]
-webhook = os.environ["WEBHOOK"] #YOUR WEBHOOK URL HERE
+webhook = os.environ.get("WEBHOOK") #YOUR WEBHOOK URL HERE
+thread_amount = os.environ["THREADS"] if os.environ.get("THREADS") else 25 # How many threads to use? Put it below 10 if using on your home computer. 25 max (also fastest)
+
 
 def main():
     bsid = [genBSID() for i in range(10)]
