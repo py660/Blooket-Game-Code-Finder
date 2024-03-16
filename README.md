@@ -9,7 +9,7 @@ Your account token should look like:
 MTcxMDYxND...tdi0c=
 ```
 
-Run the following code:
+Run the following code in the terminal/shell:
 ```
 BSID=MTcxMD...tdi0c= python main.py
 ```
