@@ -6,32 +6,37 @@ import random
 import requests
 import threading
 import os
-bsid = os.environ["BSID"] #YOUR BSID HERE
+def genBSID():
+    sess = requests.Session()
+    sess.get("https://play.blooket.com/play")
+    return sess.cookies["bsid"]
 webhook = os.environ["WEBHOOK"] #YOUR WEBHOOK URL HERE
 
 def main():
-    while 1:
-        while True:
-            random_numbers = str(random.randint(1000000, 9999999))
-            try:
+    bsid = genBSID()
+    while True:
+        random_numbers = str(random.randint(1000000, 9999999))
+        try:
+            response = requests.get(
+                f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
+                cookies={"bsid": bsid})
+            while response.status_code == 429:
                 response = requests.get(
-                    f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
-                    cookies={"bsid": bsid})
-                while response.status_code == 429:
-                    response = requests.get(
-                    f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
-                    cookies={"bsid": bsid})
-                if response.json()["success"]:
-                    print("Valid Game Code:", random_numbers)
-                    if webhook:
-                        requests.post(webhook, json={"content": f"Game Code Found: {random_numbers}"})
-                else:
-                    pass
-                    #print("Nope")
-                #data = response.json()
-            except Exception as e:
-                print('Something went wrong:')
-                print(e)
+                f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
+                cookies={"bsid": bsid})
+            if response.status_code == 403:
+                bsid = genBSID()
+            if response.json()["success"]:
+                print("Valid Game Code:", random_numbers)
+                if webhook:
+                    requests.post(webhook, json={"content": f"Game Code Found: {random_numbers}"})
+            else:
+                pass
+                #print("Nope")
+            #data = response.json()
+        except Exception as e:
+            print('Something went wrong:')
+            print(e)
 
 
 if __name__ == "__main__":
