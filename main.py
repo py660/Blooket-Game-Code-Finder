@@ -30,7 +30,7 @@ def main():
             if response.json()["success"]:
                 print("Valid Game Code:", random_numbers)
                 if webhook:
-                    requests.post(webhook, json={"content": f"Game Code Found: {random_numbers} - Join: https://play.blooket.com/play?id={random_numbers}"})
+                    requests.post(webhook, json={"content": f"Game Code Found: {random_numbers} - [Join](<https://play.blooket.com/play?id={random_numbers}>)"})
             else:
                 pass
                 #print("Nope")
