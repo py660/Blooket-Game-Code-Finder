@@ -1,9 +1,4 @@
-# CONFIG AREA BELOW
-useWebhook = False # Use a discord webhook or not, if yes, fill in the line below
-webhook = 'Your discord webhook url'
 thread_amount = 25 # How many threads to use? Put it below 10 if using on your home computer. 25 max (also fastest)
-logInvalids = False # Don't enable unless you want to have your console spammed (does not send to discord)
-# Config area end, do not edit below code
 
 #from discord_webhook import DiscordWebhook
 
@@ -12,6 +7,7 @@ import requests
 import threading
 import os
 bsid = os.environ["BSID"] #YOUR BSID HERE
+webhook = os.environ["WEBHOOK"] #YOUR WEBHOOK URL HERE
 
 def main():
     while 1:
@@ -27,6 +23,8 @@ def main():
                     cookies={"bsid": bsid})
                 if response.json()["success"]:
                     print("Valid Game Code:", random_numbers)
+                    if webhook:
+                        requests.post(webhook, json={"content": f"Game Code Found: {random_numbers}"})
                 else:
                     pass
                     #print("Nope")
