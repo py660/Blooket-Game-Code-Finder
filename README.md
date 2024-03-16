@@ -1,17 +1,8 @@
 # How to run <kbd>oliver408i's</kbd> Blooket Game Code Finder
 
-(updated by py660)
-First, log into blooket. Then, open DevTools > Application > Cookies > https://dashboard.blooket.com
-Then find the value corresponding to `bsid`, and copy it. That's your account token. DO NOT SHARE IT! KEEP IT PRIVATE.
-
-Your account token should look like:
-```
-MTcxMDYxND...tdi0c=
-```
-
 Run the following code in the terminal/shell:
 ```
-BSID=MTcxMD...tdi0c= python main.py
+python main.py
 ```
 It will notify you once a game pin is found. IF YOU FIND A GAME PIN AND WANT TO CONNECT, YOU MUST FIRST STOP THE PROGRAM.
 To stop the program, spam CTRL-C until the program stops.
