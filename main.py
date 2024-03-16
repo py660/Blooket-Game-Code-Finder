@@ -30,7 +30,8 @@ def main():
                     #print("Nope")
                 #data = response.json()
             except Exception as e:
-                print('Something went wrong: '+e)
+                print('Something went wrong:')
+                print(e)
 
 
 if __name__ == "__main__":
