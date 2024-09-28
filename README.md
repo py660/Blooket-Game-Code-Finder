@@ -7,7 +7,7 @@ python main.py
 It will notify you once a game pin is found. IF YOU FIND A GAME PIN AND WANT TO CONNECT, YOU MUST FIRST STOP THE PROGRAM.
 To stop the program, spam CTRL-C until the program stops.
 
-# NEW! Bookmarklet/javascript version
+# (Will have to fix since this is broken) ~~NEW! Bookmarklet/javascript version~~
 Create a new bookmark with the following URL:
 ```
 javascript: new Promise(async ()=>{let iframe = document.createElement("iframe");iframe.style.display="none";document.body.appendChild(iframe);window.alert = iframe.contentWindow.alert;var code=Math.floor(Math.random()*8999999+1000000);console.log(setInterval(()=>{console.log(code);fetch("https://fb.blooket.com/c/firebase/id?id=1234567", {credentials: "include"}).then(res => {if(res.ok){code=Math.floor(Math.random()*9000000+1000000);return res.text()}else{return '{"success":false,"errType":"429"}'}}).then(res=>{console.log(res);return JSON.parse(res);}).then(res=>{  if(res.success){alert("SUCCESS");alert(code);resolve()}  })},101))})
@@ -15,7 +15,7 @@ javascript: new Promise(async ()=>{let iframe = document.createElement("iframe")
 
 **OR**
 
-Go to `play.blooket.com` and paste the following code into the devtools console
+~~Go to `play.blooket.com` and paste the following code into the devtools console~~
 ```
 new Promise(async ()=>{let iframe = document.createElement("iframe");iframe.style.display="none";document.body.appendChild(iframe);window.alert = iframe.contentWindow.alert;var code=Math.floor(Math.random()*8999999+1000000);console.log(setInterval(()=>{console.log(code);fetch("https://fb.blooket.com/c/firebase/id?id=1234567", {credentials: "include"}).then(res => {if(res.ok){code=Math.floor(Math.random()*9000000+1000000);return res.text()}else{return '{"success":false,"errType":"429"}'}}).then(res=>{console.log(res);return JSON.parse(res);}).then(res=>{  if(res.success){alert("SUCCESS");alert(code);resolve()}  })},101))})
 ```
