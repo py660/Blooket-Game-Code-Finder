@@ -9,31 +9,28 @@ def genBSID():
     sess = requests.Session()
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     sess.get("https://play.blooket.com/play", headers=headers)
-    print(dict(sess.cookies))
     return sess.cookies["bsid"]
 webhook = os.environ.get("WEBHOOK") #YOUR WEBHOOK URL HERE
 thread_amount = int(os.environ["THREADS"]) if os.environ.get("THREADS") else 25 # How many threads to use? Put it below 10 if using on your home computer. 25 max (also fastest)
 
 
 def main():
-    print(genBSID())
-
-
-def main1():
     bsid = [genBSID() for i in range(10)]
     while True:
         random_numbers = str(random.randint(1000000, 9999999))
+        random_numbers = "7954652"
         try:
+            headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
             response = requests.get(
                 f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
-                cookies={"bsid": bsid[random.randint(0,9)]})
+                cookies={"bsid": bsid[random.randint(0,9)]}, headers=headers)
             while response.status_code == 429:
                 response = requests.get(
                 f"https://fb.blooket.com/c/firebase/id?id={random_numbers}",
-                cookies={"bsid": bsid[random.randint(0,9)]})
+                cookies={"bsid": bsid[random.randint(0,9)]}, headers=headers)
             if response.status_code == 403:
                 bsid = [genBSID() for i in range(10)]
-            if response.json()["success"]:
+            elif response.json()["success"]:
                 print("Valid Game Code:", random_numbers)
                 if webhook:
                     requests.post(webhook, json={"content": f"Game Code Found: [Join](<https://play.blooket.com/play?id={random_numbers}>) - {random_numbers}"})
@@ -41,7 +38,7 @@ def main1():
                 pass
                 #print("Nope")
             #data = response.json()
-        except Exception as e:
+        except KeyboardInterrupt as e:
             print('Something went wrong:')
             print(e)
 
