@@ -18,7 +18,6 @@ def main():
     bsid = [genBSID() for i in range(10)]
     while True:
         random_numbers = str(random.randint(1000000, 9999999))
-        random_numbers = "7954652"
         try:
             headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
             response = requests.get(
