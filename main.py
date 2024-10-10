@@ -7,13 +7,19 @@ import threading
 import os
 def genBSID():
     sess = requests.Session()
-    sess.get("https://play.blooket.com/play")
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    sess.get("https://play.blooket.com/play", headers=headers)
+    print(dict(sess.cookies))
     return sess.cookies["bsid"]
 webhook = os.environ.get("WEBHOOK") #YOUR WEBHOOK URL HERE
 thread_amount = int(os.environ["THREADS"]) if os.environ.get("THREADS") else 25 # How many threads to use? Put it below 10 if using on your home computer. 25 max (also fastest)
 
 
 def main():
+    print(genBSID())
+
+
+def main1():
     bsid = [genBSID() for i in range(10)]
     while True:
         random_numbers = str(random.randint(1000000, 9999999))
