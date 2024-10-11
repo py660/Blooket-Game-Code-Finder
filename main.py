@@ -37,7 +37,7 @@ def main():
                 pass
                 #print("Nope")
             #data = response.json()
-        except KeyboardInterrupt as e:
+        except Exception as e:
             print('Something went wrong:')
             print(e)
 
